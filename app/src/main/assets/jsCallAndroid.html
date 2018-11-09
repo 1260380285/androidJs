@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>yuanbing</title>
+    <script>
+
+
+         function callAndroid(){
+            test.hello("js调用了android中的hello方法");
+         }
+
+        function callAndroidbyshouldloadByOverloading(){
+            document.location = "js://webview?arg1=111&arg2=222";
+         }
+
+         function clickprompt(){
+                var js=prompt("js://demo?arg1=111&arg2=222");
+                alert(" call  " + result);
+         }
+    </script>
+</head>
+<body>
+
+<button type="button" id="button1" width="300" height="30" onclick="callAndroid()">通过javaInterface调用android</button>
+<button type="button" id="button2" width="300" height="30" onclick="callAndroidbyshouldloadByOverloading()">通过shouldOverrideUrlLoading调用android</button>
+<button type="button" id="button3" onclick="clickprompt()">点击promote调用Android代码</button>
+</body>
+</html>
