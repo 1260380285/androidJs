@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".JsCallAndroid" />
+        <activity android:name=".JsBridgeActivity"/>
     </application>
 
 </manifest>

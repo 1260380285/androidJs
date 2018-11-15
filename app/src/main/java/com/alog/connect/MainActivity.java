@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //webView.loadUrl("javascript:callJS()");
-                evaluateJavascript();
+                webView.loadUrl("javascript:callJS()");
+               // evaluateJavascript();
                /* webView.post(new Runnable() {
                     @Override
                     public void run() {
