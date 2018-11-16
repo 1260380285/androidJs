@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.github.lzyzsd.jsbridge.BridgeHandler;
 import com.github.lzyzsd.jsbridge.BridgeWebView;
 import com.github.lzyzsd.jsbridge.CallBackFunction;
-import com.google.gson.Gson;
 
 /**
  * Author: 10067835.
