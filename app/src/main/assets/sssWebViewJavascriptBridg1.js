@@ -118,8 +118,10 @@
     function _handleMessageFromNative(messageJSON) {
         console.log(messageJSON);
         if (receiveMessageQueue && receiveMessageQueue.length > 0) {
+          alert("receiveMessageQueue");
             receiveMessageQueue.push(messageJSON);
         } else {
+         alert("_dispatchMessageFromNative");
             _dispatchMessageFromNative(messageJSON);
         }
     }
