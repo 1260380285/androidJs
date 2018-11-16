@@ -20,82 +20,73 @@ public class MainActivity extends AppCompatActivity {
     private TextView jump;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initView();
-        initSetting();
-        initListener();
+    protected void onCreate ( Bundle savedInstanceState ) {
+        super.onCreate ( savedInstanceState );
+        setContentView ( R.layout.activity_main );
+        initView ( );
+        initSetting ( );
+        initListener ( );
     }
 
-    private void initSetting() {
-        WebSettings webSettings = webView.getSettings();
+    private void initSetting ( ) {
+        WebSettings webSettings = webView.getSettings ( );
         // 设置与Js交互的权限
-        webSettings.setJavaScriptEnabled(true);
+        webSettings.setJavaScriptEnabled ( true );
         // 设置允许JS弹窗
-        webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically ( true );
 
         // 先载入JS代码
-        webView.loadUrl("file:///android_asset/javascript.html");
-        webView.setWebChromeClient(new WebChromeClient() {
+        webView.loadUrl ( "file:///android_asset/javascript.html" );
+        webView.setWebChromeClient ( new WebChromeClient ( ) {
             @Override
-            public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
-                AlertDialog.Builder b = new AlertDialog.Builder(MainActivity.this);
-                b.setTitle("Alert");
-                b.setMessage(message);
-                b.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            public boolean onJsAlert ( WebView view , String url , String message , final JsResult result ) {
+                AlertDialog.Builder b = new AlertDialog.Builder ( MainActivity.this );
+                b.setTitle ( "Alert" );
+                b.setMessage ( message );
+                b.setPositiveButton ( android.R.string.ok , new DialogInterface.OnClickListener ( ) {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        result.confirm();
+                    public void onClick ( DialogInterface dialog , int which ) {
+                        result.confirm ( );
                     }
-                });
-                b.setCancelable(false);
-                b.create().show();
+                } );
+                b.setCancelable ( false );
+                b.create ( ).show ( );
                 return true;
             }
 
-        });
+        } );
     }
 
-    private void initListener() {
-        textView.setOnClickListener(new View.OnClickListener() {
+    private void initListener ( ) {
+        jump.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
-            public void onClick(View v) {
-                webView.loadUrl("javascript:callJS()");
-               // evaluateJavascript();
-               /* webView.post(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        // 注意调用的JS方法名要对应上
-                        // 调用javascript的callJS()方法
-                        webView.loadUrl("javascript:callJS()");
-                    }
-                });*/
+            public void onClick ( View v ) {
+                Intent intent = new Intent ( getApplicationContext ( ) , JsCallAndroid.class );
+                startActivity ( intent );
             }
-        });
-        jump.setOnClickListener(new View.OnClickListener() {
+        } );
+        textView.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), JsCallAndroid.class);
-                startActivity(intent);
+            public void onClick ( View v ) {
+                webView.loadUrl ( "javascript:callJS()" );
+                // evaluateJavascript();
             }
-        });
-    }
-
-    private void evaluateJavascript() {
-        webView.evaluateJavascript("javascript:callJsByEvaluateJavascript()", new ValueCallback<String>() {
-            @Override
-            public void onReceiveValue(String value) {
-                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_LONG).show();
-            }
-        });
+        } );
 
     }
 
-    private void initView() {
-        webView = findViewById(R.id.webView);
-        textView = findViewById(R.id.btn);
-        jump = findViewById(R.id.jump);
+    private void evaluateJavascript ( ) {
+        webView.evaluateJavascript ( "javascript:callJsByEvaluateJavascript()" , new ValueCallback < String > ( ) {
+            @Override
+            public void onReceiveValue ( String value ) {
+                Toast.makeText ( getApplicationContext ( ) , value , Toast.LENGTH_LONG ).show ( );
+            }
+        } );
+    }
+
+    private void initView ( ) {
+        webView = findViewById ( R.id.webView );
+        textView = findViewById ( R.id.btn );
+        jump = findViewById ( R.id.jump );
     }
 }
