@@ -22,7 +22,7 @@ import android.widget.Toast;
  * description:
  */
 
-public class JsCallAndroid extends AppCompatActivity {
+public class JsCallAndroidActivity extends AppCompatActivity {
     private WebView webView;
     private TextView textView;
     private TextView jump;
@@ -40,7 +40,7 @@ public class JsCallAndroid extends AppCompatActivity {
         jump.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
             public void onClick ( View v ) {
-                Intent intent = new Intent ( JsCallAndroid.this , JsBridgeActivity.class );
+                Intent intent = new Intent ( JsCallAndroidActivity.this , JsBridgeActivity.class );
                 startActivity ( intent );
             }
         } );
@@ -61,7 +61,7 @@ public class JsCallAndroid extends AppCompatActivity {
         webView.setWebViewClient ( new WebViewClient ( ) {
             @Override
             public boolean shouldOverrideUrlLoading ( WebView view , WebResourceRequest request ) {
-                Toast.makeText ( JsCallAndroid.this , request.getUrl ( ).toString ( ) , Toast.LENGTH_LONG ).show ( );
+                Toast.makeText ( JsCallAndroidActivity.this , request.getUrl ( ).toString ( ) , Toast.LENGTH_LONG ).show ( );
                 return true;
 
             }
@@ -69,7 +69,7 @@ public class JsCallAndroid extends AppCompatActivity {
         webView.setWebChromeClient ( new WebChromeClient ( ) {
             @Override
             public boolean onJsPrompt ( WebView view , String url , String message , String defaultValue , JsPromptResult result ) {
-                Toast.makeText ( JsCallAndroid.this , message , Toast.LENGTH_LONG ).show ( );
+                Toast.makeText ( JsCallAndroidActivity.this , message , Toast.LENGTH_LONG ).show ( );
                 result.confirm ( "js调用了Android的方法成功啦" );
                 return true;
             }

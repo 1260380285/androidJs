@@ -1,12 +1,9 @@
 package com.alog.connect;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
@@ -72,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         jump.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
             public void onClick ( View v ) {
-                Intent intent = new Intent ( getApplicationContext ( ) , JsCallAndroid.class );
+                Intent intent = new Intent ( getApplicationContext ( ) , JsCallAndroidActivity.class );
                 startActivity ( intent );
             }
         } );
