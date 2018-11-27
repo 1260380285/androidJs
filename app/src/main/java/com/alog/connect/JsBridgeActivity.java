@@ -2,6 +2,7 @@ package com.alog.connect;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -57,13 +58,19 @@ public class JsBridgeActivity extends AppCompatActivity {
         bridgeWebView.loadUrl ( "file:///android_asset/web.html" );
 
         //有方法名的都需要注册Handler后使用
-        bridgeWebView.registerHandler ( "submitFromWeb" , new BridgeHandler ( ) {
+        bridgeWebView.registerHandler ( "takePhone" , new BridgeHandler ( ) {
             @Override
-            public void handler ( String data , CallBackFunction function ) {
+            public void handler ( String data , final CallBackFunction function ) {
                 if ( ! TextUtils.isEmpty ( data ) ) {
-                    editText.setText ( "通过调用Native方法submitFromWeb接收数据：\n" + data );
+                    editText.setText ( "begin takePhone" );
                 }
-                function.onCallBack ( "Native已经接收到数据：" + data + "，请确认！" );
+                new Handler ( ).postDelayed ( new Runnable ( ) {
+                    @Override
+                    public void run ( ) {
+                        function.onCallBack ( "拍照成功..." );
+                    }
+                } , 2000 );
+
             }
         } );
 
@@ -71,7 +78,7 @@ public class JsBridgeActivity extends AppCompatActivity {
         bridgeWebView.send ( "初始化 native 向js发送的消息" , new CallBackFunction ( ) {
             @Override
             public void onCallBack ( String data ) {
-              //  Toast.makeText ( JsBridgeActivity.this , "bridge.init初始化数据成功" + data , Toast.LENGTH_SHORT ).show ( );
+                //  Toast.makeText ( JsBridgeActivity.this , "bridge.init初始化数据成功" + data , Toast.LENGTH_SHORT ).show ( );
             }
         } );
     }
