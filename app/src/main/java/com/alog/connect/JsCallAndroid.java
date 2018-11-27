@@ -69,7 +69,7 @@ public class JsCallAndroid extends AppCompatActivity {
         webView.setWebChromeClient ( new WebChromeClient ( ) {
             @Override
             public boolean onJsPrompt ( WebView view , String url , String message , String defaultValue , JsPromptResult result ) {
-                Toast.makeText ( JsCallAndroid.this , url , Toast.LENGTH_LONG ).show ( );
+                Toast.makeText ( JsCallAndroid.this , message , Toast.LENGTH_LONG ).show ( );
                 result.confirm ( "js调用了Android的方法成功啦" );
                 return true;
             }
