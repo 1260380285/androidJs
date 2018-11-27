@@ -71,7 +71,7 @@ public class JsBridgeActivity extends AppCompatActivity {
         bridgeWebView.send ( "初始化 native 向js发送的消息" , new CallBackFunction ( ) {
             @Override
             public void onCallBack ( String data ) {
-                Toast.makeText ( JsBridgeActivity.this , "bridge.init初始化数据成功" + data , Toast.LENGTH_SHORT ).show ( );
+              //  Toast.makeText ( JsBridgeActivity.this , "bridge.init初始化数据成功" + data , Toast.LENGTH_SHORT ).show ( );
             }
         } );
     }
@@ -80,8 +80,9 @@ public class JsBridgeActivity extends AppCompatActivity {
         btnSend.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
             public void onClick ( View view ) {
+                String text = editText.getText ( ).toString ( );
                 //应用启动后初始化数据调用，js处理方法connectWebViewJavascriptBridge(function(bridge)
-                bridgeWebView.callHandler ( "functionInJs" , "android 调用 Js" , new CallBackFunction ( ) {
+                bridgeWebView.callHandler ( "functionInJs" , text , new CallBackFunction ( ) {
                     @Override
                     public void onCallBack ( String data ) {
 

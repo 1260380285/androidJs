@@ -9,8 +9,10 @@ import android.view.View;
 import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,12 +35,20 @@ public class MainActivity extends AppCompatActivity {
         // 设置与Js交互的权限
         webSettings.setJavaScriptEnabled ( true );
         // 设置允许JS弹窗
-        webSettings.setJavaScriptCanOpenWindowsAutomatically ( true );
+       // webSettings.setJavaScriptCanOpenWindowsAutomatically ( true );
 
         // 先载入JS代码
+       // webView.loadUrl ( "https://www.baidu.com/" );
         webView.loadUrl ( "file:///android_asset/javascript.html" );
-        webView.setWebChromeClient ( new WebChromeClient ( ) {
+        webView.setWebViewClient ( new WebViewClient (){
             @Override
+            public boolean shouldOverrideUrlLoading ( WebView view , WebResourceRequest request ) {
+                return super.shouldOverrideUrlLoading ( view , request );
+            }
+        } );
+        //一定要写上这个才能弹alert，这个是承载体
+        webView.setWebChromeClient ( new WebChromeClient ( ) {
+           /* @Override
             public boolean onJsAlert ( WebView view , String url , String message , final JsResult result ) {
                 AlertDialog.Builder b = new AlertDialog.Builder ( MainActivity.this );
                 b.setTitle ( "Alert" );
@@ -52,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 b.setCancelable ( false );
                 b.create ( ).show ( );
                 return true;
-            }
+            }*/
 
         } );
     }
@@ -68,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         textView.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
             public void onClick ( View v ) {
-                webView.loadUrl ( "javascript:callJS()" );
-                // evaluateJavascript();
+               // webView.loadUrl ( "javascript:callJS()" );
+                 evaluateJavascript();
             }
         } );
 
