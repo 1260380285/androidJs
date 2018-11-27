@@ -19,6 +19,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
     private WebView webView;
     private TextView textView;
+    private TextView evaluateByJavascriptView;
     private TextView jump;
 
     @Override
@@ -35,12 +36,12 @@ public class MainActivity extends AppCompatActivity {
         // 设置与Js交互的权限
         webSettings.setJavaScriptEnabled ( true );
         // 设置允许JS弹窗
-       // webSettings.setJavaScriptCanOpenWindowsAutomatically ( true );
+        // webSettings.setJavaScriptCanOpenWindowsAutomatically ( true );
 
         // 先载入JS代码
-       // webView.loadUrl ( "https://www.baidu.com/" );
+        // webView.loadUrl ( "https://www.baidu.com/" );
         webView.loadUrl ( "file:///android_asset/javascript.html" );
-        webView.setWebViewClient ( new WebViewClient (){
+        webView.setWebViewClient ( new WebViewClient ( ) {
             @Override
             public boolean shouldOverrideUrlLoading ( WebView view , WebResourceRequest request ) {
                 return super.shouldOverrideUrlLoading ( view , request );
@@ -78,8 +79,13 @@ public class MainActivity extends AppCompatActivity {
         textView.setOnClickListener ( new View.OnClickListener ( ) {
             @Override
             public void onClick ( View v ) {
-               // webView.loadUrl ( "javascript:callJS('hello')" );
-                 evaluateJavascript();
+                webView.loadUrl ( "javascript:callJS('hello')" );
+            }
+        } );
+        evaluateByJavascriptView.setOnClickListener ( new View.OnClickListener ( ) {
+            @Override
+            public void onClick ( View v ) {
+                evaluateJavascript ( );
             }
         } );
 
@@ -96,7 +102,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initView ( ) {
         webView = findViewById ( R.id.webView );
-        textView = findViewById ( R.id.btn );
+        textView = findViewById ( R.id.loadUrl );
+        evaluateByJavascriptView = findViewById ( R.id.evaluateByJavascript );
         jump = findViewById ( R.id.jump );
     }
 }
