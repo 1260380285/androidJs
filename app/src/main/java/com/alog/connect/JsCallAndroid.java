@@ -13,6 +13,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Author: 10067835.
@@ -53,22 +54,22 @@ public class JsCallAndroid extends AppCompatActivity {
         // 通过addJavascriptInterface()将Java对象映射到JS对象
         //参数1：Javascript对象名
         //参数2：Java对象名
-        webView.addJavascriptInterface ( new AndroidJs ( ) , "test" );//AndroidtoJS类对象映射到js的test对象
+        webView.addJavascriptInterface ( new AndroidJs ( this ) , "test" );//AndroidtoJS类对象映射到js的test对象
 
         // 加载JS代码
         webView.loadUrl ( "file:///android_asset/jsCallAndroid.html" );
         webView.setWebViewClient ( new WebViewClient ( ) {
             @Override
             public boolean shouldOverrideUrlLoading ( WebView view , WebResourceRequest request ) {
-                System.out.print ( "Url--->" + request.getUrl ( ) );
-                return super.shouldOverrideUrlLoading ( view , request );
+                Toast.makeText ( JsCallAndroid.this , request.getUrl ( ).toString ( ) , Toast.LENGTH_LONG ).show ( );
+                return true;
 
             }
         } );
         webView.setWebChromeClient ( new WebChromeClient ( ) {
             @Override
             public boolean onJsPrompt ( WebView view , String url , String message , String defaultValue , JsPromptResult result ) {
-                System.out.print ( "Url--->" + url + ":message-->" + message );
+                Toast.makeText ( JsCallAndroid.this , url , Toast.LENGTH_LONG ).show ( );
                 result.confirm ( "js调用了Android的方法成功啦" );
                 return true;
             }
